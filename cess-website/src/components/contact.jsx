@@ -31,9 +31,13 @@ export default function Contact({ text, lang }) {
   };
 
   return (
-    <section id="contact" className="section contact">
-      <h2>{text.heading}</h2>
+    <section id="contact" className="section contact section-shell">
+      <div className="section-heading">
+        <span className="section-eyebrow">{lang === "en" ? "Contact" : "تواصل"}</span>
+        <h2>{text.heading}</h2>
+      </div>
 
+      <div className="section-content">
       <form className={`contact-form ${lang === "ar" ? "rtl" : ""}`} onSubmit={sendEmail}>
 
         <label>{text.email}</label>
@@ -59,6 +63,7 @@ export default function Contact({ text, lang }) {
         {status === "success" && <p className="success">{text.success}</p>}
         {status === "error" && <p className="error">{text.error}</p>}
       </form>
+      </div>
     </section>
   );
 }

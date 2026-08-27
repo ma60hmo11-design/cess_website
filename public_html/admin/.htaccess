@@ -1,0 +1,17 @@
+# Force YAML MIME type
+<IfModule mod_mime.c>
+    AddType text/yaml .yml
+    AddType text/yaml .yaml
+    AddType text/x-yaml .yml
+    AddType text/x-yaml .yaml
+</IfModule>
+
+# Disable all caching for this folder
+<IfModule mod_headers.c>
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</IfModule>
+
+# Prevent LiteSpeed from rewriting
+RewriteEngine Off

@@ -35,7 +35,7 @@
     }
   },
   "publications": {
-    "heading": "المنشورات",
+    "heading": "المشاريع",
     "publication_1": {
       "header": "وقود الحرب واستنزاف الموارد",
       "description": "ورقة بحثية",
@@ -49,10 +49,16 @@
       "link": "/pdfs/Under-the-Surface-Arabic.pdf"
     },
     "publication_3": {
-      "header": "وقود الحرب واستنزاف الموارد",
+      "header": "الذهب في الصراع",
       "description": "ورقة بحثية — قريباً",
-      "year": "2025",
+      "year": "2026",
       "link": "قريباً"
+    },
+    "project_1": {
+      "header": "",
+      "description": "",
+      "year": "",
+      "link": ""
     }
   },
   "contact": {
@@ -62,5 +68,8 @@
     "send": "إرسال الرسالة",
     "success": "تم إرسال الرسالة بنجاح!",
     "error": "حدث خطأ. الرجاء المحاولة مرة أخرى."
+  },
+  "project": {
+    "heading": "المشاريع"
   }
 }

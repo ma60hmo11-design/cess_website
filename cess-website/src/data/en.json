@@ -23,7 +23,8 @@
     },
     "project_4": {
       "header": "CONFLICT GOLD",
-      "body": "Sudan’s gold sector has become central to the dynamics of the current war, shaping patterns of violence, displacement, and illicit trade. More than 80% of Sudan’s gold is produced by artisanal and unregulated miners, yet both “legal” and “illegal” actors operate within the same networks. Armed groups, private companies, and regional intermediaries benefit from this hybrid system, while international sanctions have failed to disrupt the underlying structures that finance the conflict. Despite widespread recognition of these dynamics, Sudanese gold is still not formally recognized as “conflict gold” in global supply chains. Through this project, CESS brings together affected communities, technical experts, legal practitioners, and civil society organizations to build a unified evidence base and advance a coordinated advocacy campaign. The initiative documents the links between gold extraction and conflict—including land dispossession, child labor, unsafe working conditions, and smuggling—and aligns this analysis with international conflict-mineral standards. The project’s goal is to establish Sudan’s gold as “conflict gold” at the global level, strengthen accountability mechanisms, and amplify the voices of miners and communities most affected by extraction. By supporting local-led knowledge production and developing an international advocacy network, the campaign seeks to promote transparency, disrupt war-financing channels, and contribute to broader pathways toward peace and economic justice in Sudan."
+      "body": "Sudan’s gold sector has become central to the dynamics of the current war, shaping patterns of violence, displacement, and illicit trade. More than 80% of Sudan’s gold is produced by artisanal and unregulated miners, yet both “legal” and “illegal” actors operate within the same networks. Armed groups, private companies, and regional intermediaries benefit from this hybrid system, while international sanctions have failed to disrupt the underlying structures that finance the conflict. Despite widespread recognition of these dynamics, Sudanese gold is still not formally recognized as “conflict gold” in global supply chains. Through this project, CESS brings together affected communities, technical experts, legal practitioners, and civil society organizations to build a unified evidence base and advance a coordinated advocacy campaign. The initiative documents the links between gold extraction and conflict—including land dispossession, child labor, unsafe working conditions, and smuggling—and aligns this analysis with international conflict-mineral standards. The project’s goal is to establish Sudan’s gold as “conflict gold” at the global level, strengthen accountability mechanisms, and amplify the voices of miners and communities most affected by extraction. By supporting local-led knowledge production and developing an international advocacy network, the campaign seeks to promote transparency, disrupt war-financing channels, and contribute to broader pathways toward peace and economic justice in Sudan.",
+      "pdfLink": "/pdfs/Under-The_Surface_English.pdf"
     },
     "project_5": {
       "header": "Gold mining investgation map",
@@ -35,7 +36,7 @@
     }
   },
   "publications": {
-    "heading": "Publications",
+    "heading": "project",
     "publication_1": {
       "header": "Fuel of War and Resource Depletion",
       "description": "Research paper",
@@ -49,10 +50,16 @@
       "link": "/pdfs/Under-The_Surface_English.pdf"
     },
     "publication_3": {
-      "header": "Fuel of War and Resource Depletion",
-      "description": "Research paper-Coming Soon",
-      "year": "2025",
-      "link": "coming soon"
+      "header": "Gold mining and trade in the Ethiopian-Sudanese borderlands and Blue Nile State",
+      "description": "Blue Nile State Gold mining Book",
+      "year": "2026",
+      "link": "/pdfs/Gold mining and trade in the Ethiopian-Sudanese borderlands and Blue Nile State.pdf"
+    },
+    "project_1": {
+      "header": "Gold mining and trade in the Ethiopian-Sudanese\nborderlands and Blue Nile State",
+      "description": "Blue Nile State Gold mining",
+      "year": "2026",
+      "link": "/pdfs/Ille_Abdelrahman_2026_Blue-Nile-gold-markets-2019-2-183"
     }
   },
   "contact": {
@@ -62,5 +69,8 @@
     "send": "Send Message",
     "success": "Message sent successfully!",
     "error": "Something went wrong. Please try again."
+  },
+  "project": {
+    "heading": "project"
   }
 }

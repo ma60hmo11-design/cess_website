@@ -1,39 +1,56 @@
-/* index.css — GLOBAL ONLY */
-
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
   max-width: 100%;
   overflow-x: hidden !important;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
-  font-family: jetbrains mono, monospace, 'Amiri', sans-serif;
-  background-color: #f1efd6;
-  color: #111;
+  font-family: "JetBrains Mono", monospace, "Amiri", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(244, 194, 41, 0.12), transparent 28%),
+    linear-gradient(180deg, #f4efdf 0%, #f1ecd7 100%);
+  color: #151515;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100vh;
 }
 
 .site-wrapper {
-  width: 90%;
-  max-width: 1450px;
+  width: min(1200px, 92vw);
   margin: 0 auto;
-  padding: 0;
+  padding: 0 0 2rem;
 }
 
-/* RTL */
 .rtl {
   direction: rtl;
   text-align: right;
-  font-family: 'Amiri', sans-serif !important;
+  font-family: "Amiri", sans-serif !important;
 }
 
-.rtl h1, .rtl h2, .rtl h3, .rtl h4, .rtl p {
+.rtl h1,
+.rtl h2,
+.rtl h3,
+.rtl h4,
+.rtl p,
+.rtl li,
+.rtl label {
   text-align: right;
 }
 
-/* Prevent RTL on sticky bars */
 .always-ltr {
   direction: ltr !important;
   unicode-bidi: isolate !important;

@@ -16,10 +16,10 @@ import Footer from "./components/Footer.jsx";
 import GeometryBar from "./components/GeometryBar.jsx";
 import Ticker from "./components/Ticker.jsx";
 import Contact from "./components/contact.jsx";
-
-// NEW
+import Conflict from "./components/Conflict.jsx";
 import BlogList from "./components/BlogList.jsx";
-import BlogPost from "./components/BlogPost.jsx";
+import BlogPost from "./components/Blogpost.jsx";
+
 
 function AppContent() {
   const [lang, setLang] = useState("en");
@@ -52,7 +52,12 @@ function AppContent() {
       </div>
 
       <div className="top-buttons">
-        <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
+        <button
+          className="menu-btn"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-expanded={menuOpen}
+          aria-label={lang === "en" ? "Toggle navigation menu" : "فتح أو إغلاق القائمة"}
+        >
           ☰
         </button>
 
@@ -65,7 +70,7 @@ function AppContent() {
       </div>
 
       {menuOpen && (
-        <div className={`menu-dropdown ${lang === "ar" ? "rtl" : ""}`}>
+        <nav className={`menu-dropdown ${lang === "ar" ? "rtl" : ""}`} aria-label={lang === "en" ? "Site sections" : "أقسام الموقع"}>
           <button onClick={() => scrollToSection("about")}>
             {lang === "en" ? "About" : "عن المركز"}
           </button>
@@ -78,7 +83,7 @@ function AppContent() {
           <button onClick={() => scrollToSection("contact")}>
             {lang === "en" ? "Contact Us" : "تواصل معنا"}
           </button>
-        </div>
+        </nav>
       )}
 
       <Routes>
@@ -98,6 +103,7 @@ function AppContent() {
 
         <Route path="/blog" element={<BlogList lang={lang} />} />
         <Route path="/blog/:id" element={<BlogPost lang={lang} />} />
+        <Route path="/conflict" element={<Conflict lang={lang} />} />
       </Routes>
     </div>
   );
