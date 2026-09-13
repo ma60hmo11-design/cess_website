@@ -18,24 +18,24 @@
   display: inline-block;
   flex-shrink: 0;
   transform-origin: center;
-  animation: roll 10s linear infinite;
+  animation: roll 2.5s linear infinite;
   opacity: 0.9;
 }
 
 .shape:nth-child(2) {
-  animation-duration: 12s;
+  animation-duration: 3s;
 }
 
 .shape:nth-child(3) {
-  animation-duration: 9s;
+  animation-duration: 2.25s;
 }
 
 .shape:nth-child(4) {
-  animation-duration: 14s;
+  animation-duration: 3.5s;
 }
 
 .shape:nth-child(5) {
-  animation-duration: 11s;
+  animation-duration: 2.75s;
 }
 
 .shape.dot {

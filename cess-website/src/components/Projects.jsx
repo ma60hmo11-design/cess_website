@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
 
@@ -9,27 +9,64 @@ import ConflictImage from "../assets/mine4.png";
 
 export default function Projects({ text, lang }) {
 
-  // states for expand/collapse
-  const [expanded, setExpanded] = useState({
-    p1: false,
-    p2: false,
-    p3: false,
-    p4: false
-  });
+  const [selectedProject, setSelectedProject] = useState(null);
 
   // DIFFERENT LIMIT for EN / AR
   const limit = lang === "ar" ? 200 : 120;
 
   // preview logic
-  const getPreview = (body, isExpanded) => {
-    if (isExpanded) return body;
+  const getPreview = (body) => {
     if (body.length <= limit) return body;
     return body.substring(0, limit) + "...";
   };
 
-  // button label
-  const more = lang === "ar" ? "عرض المزيد" : "See more";
-  const less = lang === "ar" ? "عرض أقل" : "See less";
+  const readMore = lang === "ar" ? "اقرأ المزيد" : "Read More";
+  const closeLabel = lang === "ar" ? "إغلاق" : "Close";
+  const visitLabel = lang === "ar" ? "زيارة" : "Visit";
+
+  const projects = [
+    { key: "p1", image: MapImage, data: text.project_1 },
+    { key: "p2", image: broadCastImage, data: text.project_2 },
+    { key: "p3", image: PublicationImage, data: text.project_3, href: "/blog" },
+    { key: "p4", image: ConflictImage, data: text.project_4, href: "/conflict" }
+  ];
+
+  useEffect(() => {
+    if (!selectedProject) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") setSelectedProject(null);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [selectedProject]);
+
+  const renderProjectCard = (project, setIndex) => {
+    const cardContent = (
+      <>
+        <img src={project.image} alt="" className="project-image" />
+        <div className="project-card-body">
+          <h3>{project.data.header}</h3>
+          <p>{getPreview(project.data.body)}</p>
+        </div>
+      </>
+    );
+
+    return (
+      <article className="project-card" key={`${project.key}-${setIndex}`}>
+        {project.href ? <Link to={project.href} className="card-link">{cardContent}</Link> : cardContent}
+        <button className="see-more-btn" type="button" onClick={() => setSelectedProject(project)}>
+          {readMore}
+        </button>
+      </article>
+    );
+  };
 
   return (
     <section id="projects" className="section projects section-shell">
@@ -40,88 +77,50 @@ export default function Projects({ text, lang }) {
 
       <div className="section-content">
         <div className="project-grid">
-
-          {/* PROJECT 1 */}
-          <article className="project-card">
-            <img src={MapImage} alt="" className="project-image" />
-            <div className="project-card-body">
-              <h3>{text.project_1.header}</h3>
-
-              <p>{getPreview(text.project_1.body, expanded.p1)}</p>
-
-              {text.project_1.body.length > limit && (
-                <button
-                  className="see-more-btn"
-                  onClick={() => setExpanded({ ...expanded, p1: !expanded.p1 })}
-                >
-                  {expanded.p1 ? less : more}
-                </button>
-              )}
-            </div>
-          </article>
-
-          {/* PROJECT 2 */}
-          <article className="project-card">
-            <img src={broadCastImage} alt="" className="project-image" />
-            <div className="project-card-body">
-              <h3>{text.project_2.header}</h3>
-
-              <p>{getPreview(text.project_2.body, expanded.p2)}</p>
-
-              {text.project_2.body.length > limit && (
-                <button
-                  className="see-more-btn"
-                  onClick={() => setExpanded({ ...expanded, p2: !expanded.p2 })}
-                >
-                  {expanded.p2 ? less : more}
-                </button>
-              )}
-            </div>
-          </article>
-
-          {/* PROJECT 3 */}
-          <article className="project-card">
-            <Link to="/blog" className="card-link">
-              <img src={PublicationImage} alt="" className="project-image" />
-              <div className="project-card-body">
-                <h3>{text.project_3.header}</h3>
-
-                <p>{getPreview(text.project_3.body, expanded.p3)}</p>
-              </div>
-            </Link>
-            {text.project_3.body.length > limit && (
-              <button
-                className="see-more-btn"
-                onClick={() => setExpanded({ ...expanded, p3: !expanded.p3 })}
-              >
-                {expanded.p3 ? less : more}
-              </button>
-            )}
-          </article>
-
-          {/* PROJECT 4 */}
-          <article className="project-card">
-            <Link to="/conflict" className="card-link">
-              <img src={ConflictImage} alt="" className="project-image" />
-              <div className="project-card-body">
-                <h3>{text.project_4.header}</h3>
-
-                <p>{getPreview(text.project_4.body, expanded.p4)}</p>
-              </div>
-            </Link>
-            
-            {text.project_4.body.length > limit && (
-              <button
-                className="see-more-btn"
-                onClick={() => setExpanded({ ...expanded, p4: !expanded.p4 })}
-              >
-                {expanded.p4 ? less : more}
-              </button>
-            )}
-          </article>
-
+          <div className="project-marquee-set" aria-hidden="false">
+            {projects.map((project) => renderProjectCard(project, 0))}
+          </div>
+          <div className="project-marquee-set" aria-hidden="true">
+            {projects.map((project) => renderProjectCard(project, 1))}
+          </div>
         </div>
       </div>
+
+      {selectedProject && (
+        <div
+          className="project-modal-backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setSelectedProject(null);
+          }}
+        >
+          <div className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+            <button
+              className="project-modal-close"
+              type="button"
+              onClick={() => setSelectedProject(null)}
+              aria-label={closeLabel}
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <img src={selectedProject.image} alt="" className="project-modal-image" />
+            <div className="project-modal-body">
+              <h3 id="project-modal-title">{selectedProject.data.header}</h3>
+              <p>{selectedProject.data.body}</p>
+              <div className="project-modal-actions">
+                {selectedProject.href && (
+                  <Link to={selectedProject.href} className="see-more-btn modal-action-btn">
+                    {visitLabel}
+                  </Link>
+                )}
+                <button className="see-more-btn" type="button" onClick={() => setSelectedProject(null)}>
+                  {closeLabel}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

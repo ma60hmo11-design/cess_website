@@ -14,6 +14,10 @@ body {
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   font-family: "JetBrains Mono", monospace, "Amiri", sans-serif;
   background:
@@ -29,8 +33,13 @@ body {
   min-height: 100vh;
 }
 
+p {
+  font-size: 1.1rem;
+  text-align: justify;
+}
+
 .site-wrapper {
-  width: min(1200px, 92vw);
+  width: min(1200px, calc(100vw - clamp(1.25rem, 2vw, 2.5rem)));
   margin: 0 auto;
   padding: 0 0 2rem;
 }
@@ -41,14 +50,27 @@ body {
   font-family: "Amiri", sans-serif !important;
 }
 
+@media (max-width: 640px) {
+  html {
+    font-size: 15px;
+  }
+
+  .site-wrapper {
+    width: min(100%, calc(100vw - 1rem));
+  }
+}
+
 .rtl h1,
 .rtl h2,
 .rtl h3,
 .rtl h4,
-.rtl p,
 .rtl li,
 .rtl label {
   text-align: right;
+}
+
+.rtl p {
+  text-align: justify;
 }
 
 .always-ltr {

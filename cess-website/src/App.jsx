@@ -15,7 +15,6 @@ import Publications from "./components/Publications.jsx";
 import Footer from "./components/Footer.jsx";
 import GeometryBar from "./components/GeometryBar.jsx";
 import Ticker from "./components/Ticker.jsx";
-import Contact from "./components/contact.jsx";
 import Conflict from "./components/Conflict.jsx";
 import BlogList from "./components/BlogList.jsx";
 import BlogPost from "./components/Blogpost.jsx";
@@ -51,41 +50,6 @@ function AppContent() {
         <Ticker />
       </div>
 
-      <div className="top-buttons">
-        <button
-          className="menu-btn"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-expanded={menuOpen}
-          aria-label={lang === "en" ? "Toggle navigation menu" : "فتح أو إغلاق القائمة"}
-        >
-          ☰
-        </button>
-
-        <button
-          className="lang-switch"
-          onClick={() => setLang(lang === "en" ? "ar" : "en")}
-        >
-          {lang === "en" ? "ع" : "En"}
-        </button>
-      </div>
-
-      {menuOpen && (
-        <nav className={`menu-dropdown ${lang === "ar" ? "rtl" : ""}`} aria-label={lang === "en" ? "Site sections" : "أقسام الموقع"}>
-          <button onClick={() => scrollToSection("about")}>
-            {lang === "en" ? "About" : "عن المركز"}
-          </button>
-          <button onClick={() => scrollToSection("projects")}>
-            {lang === "en" ? "Projects" : "المشاريع"}
-          </button>
-          <button onClick={() => scrollToSection("publications")}>
-            {lang === "en" ? "Publications" : "المنشورات"}
-          </button>
-          <button onClick={() => scrollToSection("contact")}>
-            {lang === "en" ? "Contact Us" : "تواصل معنا"}
-          </button>
-        </nav>
-      )}
-
       <Routes>
         <Route
           path="/"
@@ -95,8 +59,7 @@ function AppContent() {
               <About text={t.about} lang={lang} />
               <Projects text={t.projects} lang={lang} />
               <Publications text={t.publications} lang={lang} />
-              <Contact text={t.contact} lang={lang} />
-              <Footer text={t.footer} lang={lang} />
+              <Footer text={t} lang={lang} menuOpen={menuOpen} setMenuOpen={setMenuOpen} setLang={setLang} scrollToSection={scrollToSection} />
             </>
           }
         />

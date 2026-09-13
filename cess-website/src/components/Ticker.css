@@ -62,7 +62,7 @@
 }
 
 .move-left {
-  animation: scroll-left 22s linear infinite;
+  animation: scroll-left 40s linear infinite;
 }
 
 .move-right {
