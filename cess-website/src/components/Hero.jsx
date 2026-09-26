@@ -2,17 +2,11 @@ import React from "react";
 import "../App.css";
 import logoEN from "../assets/LOGOCESS2025-01.png";
 
-export default function Hero({ text, lang }) {
+export default function Hero({ text }) {
   return (
     <header className="hero section-shell">
       <div className="hero-header">
         <div className="hero-copy">
-          <span
-            className={`section-eyebrow section-eyebrow--${lang === "ar" ? "ar" : "en"}`}
-            dir={lang === "ar" ? "rtl" : "ltr"}
-          >
-            {lang === "ar" ? "مركز الدراسات البيئية والاجتماعية" : "Centre for Environmental & Social Studies"}
-          </span>
           <h1 className="hero-title">{text.title}</h1>
         </div>
         <div className="hero-divider" aria-hidden="true" />

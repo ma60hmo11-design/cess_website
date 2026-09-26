@@ -2,9 +2,6 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 import blogData from "../data/blog.json";
 import { getBlogImage } from "../data/blogImages.js";
-import Footer from "../components/Footer.jsx";
-import en from "../data/en.json";
-import ar from "../data/Ar.json";
 
 function renderInlineBold(text) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
@@ -73,8 +70,8 @@ function renderRichBody(bodyText) {
 
 export default function BlogPost({ lang }) {
   const { id } = useParams();
-  const t = lang === "en" ? en : ar;
   const post = blogData.posts.find((entry) => entry.id === id);
+  const titleText = post ? (lang === "en" ? post.title_en : post.title_ar) : "";
 
   if (!post) return <h2>Post not found</h2>;
 
@@ -84,13 +81,12 @@ export default function BlogPost({ lang }) {
   return (
     <>
       <section className="blog-post section-shell">
-        <div className="article-header">
+        <div className="article-hero-grid">
+          <div className="article-header">
           <span className="section-eyebrow">{lang === "en" ? "Essay" : "مقال"}</span>
-          <h2>{lang === "en" ? post.title_en : post.title_ar}</h2>
+            <h2>{titleText}</h2>
           <p className="author">{lang === "en" ? post.author_en : post.author_ar}</p>
-        </div>
-
-        <div className="section-content">
+          </div>
           {image && (
             <img
               src={image}
@@ -98,15 +94,17 @@ export default function BlogPost({ lang }) {
               className="article-cover"
             />
           )}
+        </div>
+
+        <div className="section-content">
           <article className="blog-body">{renderRichBody(body)}</article>
         </div>
 
         <Link to="/blog" className="see-more-btn">
-          {lang === "en" ? "← Back to Blog" : "← العودة للمدونة"}
+          {lang === "en" ? "← Back to Blog" : "العودة للمدونة →"}
         </Link>
       </section>
 
-      <Footer text={t.footer} lang={lang} />
     </>
   );
 }

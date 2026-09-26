@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Footer from "./Footer.jsx";
 import ConflictImage from "../assets/mine4.png";
 import Pdficon from "../assets/pdf-svgrepo-com.png";
 import en from "../data/en.json";
@@ -284,14 +283,14 @@ function VolkswagenReportView({ lang, onBack }) {
             </div>
             <div className="volkswagen-slider-controls">
               <button type="button" onClick={prevSlide}>
-                ←
+                {lang === "ar" ? "\u2192" : "\u2190"}
               </button>
               <div className="volkswagen-slider-caption">
                 <strong>{report.sliderSection.slides[slideIndex].title}</strong>
                 <p>{report.sliderSection.slides[slideIndex].caption}</p>
               </div>
               <button type="button" onClick={nextSlide}>
-                →
+                {lang === "ar" ? "\u2190" : "\u2192"}
               </button>
             </div>
           </div>
@@ -423,6 +422,17 @@ function VolkswagenReportView({ lang, onBack }) {
 export default function Conflict({ lang }) {
   const t = lang === "en" ? en : ar;
   const project = t.projects.project_4;
+  const projectContext = lang === "en"
+    ? [
+        "The investigation follows gold from mining sites through the routes where it is traded. It examines how weak oversight, opaque supply chains, and armed control can make it difficult to establish where gold comes from and who benefits from its sale.",
+        "Its documentation brings together evidence on land dispossession, child labour, unsafe working conditions, and smuggling. These issues are considered as connected pressures on miners, their families, and communities living around extraction sites.",
+        "By placing community experience alongside technical and legal analysis, CESS aims to make the evidence useful to researchers, practitioners, and advocates. The work calls for transparent sourcing, stronger accountability, and greater attention to the people who bear the costs of extraction and conflict.",
+      ]
+    : [
+        "يتتبع التحقيق قضية الذهب من مواقع التعدين إلى مسارات تداوله. ويفحص كيف يمكن لضعف الرقابة وغموض سلاسل التوريد وسيطرة الجماعات المسلحة أن تجعل تحديد مصدر الذهب والجهات المستفيدة من بيعه أمراً صعباً.",
+        "وتجمع أعمال التوثيق أدلة حول نزع الأراضي وعمل الأطفال وظروف العمل غير الآمنة والتهريب. وتُقرأ هذه القضايا بوصفها ضغوطاً مترابطة تقع على عاتق المعدّنين وأسرهم والمجتمعات المحيطة بمواقع الاستخراج.",
+        "ومن خلال وضع خبرات المجتمعات إلى جانب التحليل الفني والقانوني، يسعى المركز إلى جعل الأدلة أكثر فائدة للباحثين والممارسين والمهتمين بالمناصرة. ويدعو هذا العمل إلى شفافية أكبر في مصادر الذهب، ومساءلة أقوى، واهتمام أكبر بمن يتحملون كلفة الاستخراج والصراع.",
+      ];
   const location = useLocation();
   const navigate = useNavigate();
   const view = new URLSearchParams(location.search).get("view");
@@ -438,25 +448,33 @@ export default function Conflict({ lang }) {
       {isVolkswagenView ? (
         <VolkswagenReportView lang={lang} onBack={closeVolkswagen} />
       ) : (
+        <>
+        <section
+          className="conflict-hero"
+          style={{ backgroundImage: `url(${ConflictImage})` }}
+        >
+          <div className="conflict-hero-copy">
+            <span className="conflict-hero-kicker">
+              {lang === "en" ? "Latest Investigation" : "\u0622\u062e\u0631 \u062a\u062d\u0642\u064a\u0642"}
+            </span>
+            <h1 className="conflict-hero-title">{project.header}</h1>
+          </div>
+        </section>
+
+        <section className="conflict-description-section">
+          <div className="conflict-hero-summary">
+            <p>{project.body}</p>
+            {projectContext.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          </div>
+          <Link to="/" className="conflict-back-link">
+            {lang === "en" ? "\u2190 Back to Home" : "\u0627\u0644\u0639\u0648\u062f\u0629 \u0644\u0644\u0631\u0626\u064a\u0633\u064a\u0629 \u2192"}
+          </Link>
+        </section>
+
         <section className="section project-detail">
           <div className="container">
-            <Link
-              to="/"
-              className="see-more-btn"
-              style={{ marginBottom: "20px", display: "inline-block", textDecoration: "none" }}
-            >
-              {lang === "en" ? "← Back to Home" : "← العودة للرئيسية"}
-            </Link>
-            <img
-              src={ConflictImage}
-              alt={project.header}
-              className="project-image"
-              style={{ width: "100%", maxHeight: "400px", objectFit: "cover", borderRadius: "8px" }}
-            />
-            <h2 style={{ marginTop: "20px" }}>{project.header}</h2>
-            <p style={{ lineHeight: "1.6", fontSize: "1.1rem", marginTop: "15px" }}>{project.body}</p>
             <div className="conflict-actions">
-              <article className="conflict-feature-card">
+              <article className="conflict-feature">
                 <div className="conflict-feature-copy">
                   <span className="volkswagen-section-kicker">{lang === "ar" ? "تقرير" : "Report"}</span>
                   <h3>{lang === "ar" ? volkswagenReport.ar.title : volkswagenReport.en.title}</h3>
@@ -473,9 +491,8 @@ export default function Conflict({ lang }) {
             </div>
           </div>
         </section>
+        </>
       )}
-
-      <Footer text={t.footer} lang={lang} />
     </div>
   );
 }

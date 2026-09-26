@@ -671,6 +671,7 @@ blog_actions.pack(fill="x", padx=10, pady=10)
 tk.Button(blog_actions, text="+ Add New Post", command=add_new_post).pack(side="left", padx=(0, 8))
 tk.Button(blog_actions, text="Delete Post", fg="red", command=delete_post).pack(side="left", padx=(0, 8))
 tk.Button(blog_actions, text="Save Post", command=save_post).pack(side="left")
+<<<<<<< HEAD
 
 # ======================================================================
 #   TAB: conflict MANAGER (SCROLLABLE)  ✅ NEW
@@ -866,6 +867,8 @@ pro_selector["values"] = _pro_keys(en_data)
 if _pro_keys(en_data):
     pro_selector.set(_pro_keys(en_data)[0])
     load_project()
+=======
+>>>>>>> d0313a9cf260f69b9f65f5ee93323aeb343c9685
 
 
 # ======================================================================

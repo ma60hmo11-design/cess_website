@@ -47,7 +47,7 @@ p {
 .rtl {
   direction: rtl;
   text-align: right;
-  font-family: "Amiri", sans-serif !important;
+  font-family: "Amiri", "Noto Naskh Arabic", "Noto Sans Arabic", sans-serif !important;
 }
 
 @media (max-width: 640px) {
